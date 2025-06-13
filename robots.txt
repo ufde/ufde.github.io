@@ -1,0 +1,420 @@
+# Configuraciones creadas por: undefined_name
+# Amm me parece que tu no deberías estar aquí viendo esto, puedes irte de aquí y porfavor parar de intentar analizar mi web y ver como copiarla o lo que sea que estés intentando? Te lo agradecería mucho :)
+
+User-agent: Mozilla/5.0 (iPhone; CPU iPhone OS 17_2_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.2 Mobile/15E148 Safari/604.1
+Disallow: /
+
+User-agent: Mozilla/5.0 (iPhone; CPU iPhone OS 17_3_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.3 Mobile/15E148 Safari/604.1
+Disallow: /
+
+User-agent: Mozilla/5.0 (iPhone; CPU iPhone OS 17_5_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.5 Mobile/15E148 Safari/604.1
+Disallow: /
+
+User-agent: Mozilla/5.0 (iPhone; CPU iPhone OS 17_4_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.4 Mobile/15E148 Safari/604.1
+Disallow: /
+
+User-agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36
+Disallow: /
+
+User-agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36
+Disallow: /
+
+User-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36
+Disallow: /
+
+User-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 11_2_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36
+Disallow: /
+
+User-agent: Mozilla/5.0 (Linux; Android 10; SM-G981B) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Mobile Safari/537.36
+Disallow: /
+
+User-agent: Mozilla/5.0 (Linux; Android 11; Pixel 5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Mobile Safari/537.36
+Disallow: /
+
+User-agent: Mozilla/5.0 (iPhone; CPU iPhone OS 17_1_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148
+Disallow: /
+
+User-agent: Mozilla/5.0 (iPhone; CPU iPhone OS 17_2_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148
+Disallow: /
+
+User-agent: Mozilla/5.0 (iPhone; CPU iPhone OS 16_5_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.5.2 Mobile/15E148 Safari/604.1
+Disallow: /
+
+User-agent: Mozilla/5.0 (iPhone; CPU iPhone OS 15_8 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.6.6 Mobile/15E148 Safari/604.1
+Disallow: /
+
+User-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:128.0) Gecko/20100101 Firefox/128.0
+Disallow: /
+
+User-agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36
+Disallow: /
+
+User-agent: HTTrack
+Disallow: /
+User-agent: wget
+Disallow: /
+User-agent: curl
+Disallow: /
+User-agent: python-requests
+Disallow: /
+User-agent: Scrapy
+Disallow: /
+User-agent: Nmap
+Disallow: /
+User-agent: masscan
+Disallow: /
+User-agent: NetcraftSurveyAgent
+Disallow: /
+User-agent: ZGrab
+Disallow: /
+User-agent: CensysInspect
+Disallow: /
+User-agent: FuzzBot
+Disallow: /
+User-agent: Go-http-client
+Disallow: /
+User-agent: sqlmap
+Disallow: /
+User-agent: DirBuster
+Disallow: /
+User-agent: Nikto
+Disallow: /
+User-agent: Nessus
+Disallow: /
+User-agent: Arachni
+Disallow: /
+User-agent: Morfeus F
+Disallow: /
+User-agent: Riddler
+Disallow: /
+User-agent: Crawler4j
+Disallow: /
+User-agent: BlackWidow
+Disallow: /
+User-agent: VoidEYE
+Disallow: /
+User-agent: TrojanScanner
+Disallow: /
+User-agent: Paros
+Disallow: /
+User-agent: Acunetix
+Disallow: /
+User-agent: Metasploit
+Disallow: /
+User-agent: OpenVAS
+Disallow: /
+User-agent: WPScan
+Disallow: /
+User-agent: Burp Suite
+Disallow: /
+User-agent: sqlninja
+Disallow: /
+User-agent: Xenu
+Disallow: /
+User-agent: SiteSnagger
+Disallow: /
+User-agent: CheeseBot
+Disallow: /
+User-agent: Barkrowler
+Disallow: /
+User-agent: BUbiNG
+Disallow: /
+User-agent: NetEstate NE Crawler
+Disallow: /
+User-agent: MojeekBot
+Disallow: /
+User-agent: SISTRIX Crawler
+Disallow: /
+User-agent: WoorankReview
+Disallow: /
+User-agent: serpstatbot
+Disallow: /
+User-agent: HeadlessChrome
+Disallow: /
+User-agent: HubSpot Crawler
+Disallow: /
+User-agent: BDCbot
+Disallow: /
+User-agent: AwarioBot
+Disallow: /
+User-agent: ExifBot
+Disallow: /
+User-agent: RoboLike
+Disallow: /
+User-agent: OpenindexSpider
+Disallow: /
+User-agent: Citoid
+Disallow: /
+User-agent: Seekport Crawler
+Disallow: /
+User-agent: rogerbot
+Disallow: /
+User-agent: trendictionbot
+Disallow: /
+User-agent: Diffbot
+Disallow: /
+User-agent: ShopWiki
+Disallow: /
+User-agent: HTTPMon
+Disallow: /
+User-agent: BomboraBot
+Disallow: /
+User-agent: Lavf
+Disallow: /
+User-agent: LWP::Simple
+Disallow: /
+User-agent: Pandalytics
+Disallow: /
+User-agent: PaperLiBot
+Disallow: /
+User-agent: MegaIndex
+Disallow: /
+User-agent: Abonti
+Disallow: /
+User-agent: LinksCrawler
+Disallow: /
+User-agent: LinkpadBot
+Disallow: /
+User-agent: magpie-crawler
+Disallow: /
+User-agent: Dataprovider
+Disallow: /
+User-agent: SBL-BOT
+Disallow: /
+User-agent: ArchiveTeam ArchiveBot
+Disallow: /
+User-agent: SeekportBot
+Disallow: /
+User-agent: PrivacyAwareBot
+Disallow: /
+User-agent: Domains Project Scanner
+Disallow: /
+User-agent: PycURL
+Disallow: /
+User-agent: Scrapybot
+Disallow: /
+User-agent: Pagefreezer
+Disallow: /
+User-agent: BublupBot
+Disallow: /
+User-agent: JikeSpider
+Disallow: /
+User-agent: MauiBot
+Disallow: /
+User-agent: SerendeputyBot
+Disallow: /
+User-agent: ADmantX
+Disallow: /
+User-agent: WeSEE
+Disallow: /
+User-agent: Serpmetrics
+Disallow: /
+User-agent: Majestic-12
+Disallow: /
+User-agent: RavenCrawler
+Disallow: /
+User-agent: IP2LocationBot
+Disallow: /
+User-agent: SocialRankIOBot
+Disallow: /
+User-agent: ArchiveBot
+Disallow: /
+User-agent: Dataminr
+Disallow: /
+User-agent: Omgilibot
+Disallow: /
+User-agent: MixrankBot
+Disallow: /
+User-agent: UptimeBot
+Disallow: /
+User-agent: MonitoringBot
+Disallow: /
+User-agent: Detectify
+Disallow: /
+User-agent: ca-crawler
+Disallow: /
+User-agent: phpcrawl
+Disallow: /
+User-agent: FemtosearchBot
+Disallow: /
+User-agent: Xaldon WebSpider
+Disallow: /
+User-agent: MetaURI
+Disallow: /
+User-agent: Plukkie
+Disallow: /
+User-agent: CCBot
+Disallow: /
+User-agent: MagpieRSS
+Disallow: /
+User-agent: CheckMarkNetwork
+Disallow: /
+User-agent: discobot
+Disallow: /
+User-agent: HyperCrawl
+Disallow: /
+User-agent: DisallowedBot
+Disallow: /
+User-agent: LivelapBot
+Disallow: /
+User-agent: Pingdom
+Disallow: /
+User-agent: DeepCrawl
+Disallow: /
+User-agent: WhatWeb
+Disallow: /
+User-agent: FuzzDB
+Disallow: /
+
+User-agent: *
+Allow: /
+Allow: /wp-content/themes/
+Allow: /wp-content/plugins/
+Allow: /wp-includes/
+Allow: /uploads/
+Allow: /images/
+Allow: /videos/
+Allow: /assets/
+Allow: /wp-content/themes/my-theme/js/
+Allow: /wp-content/plugins/important-plugin/js/
+Disallow: /admin/
+Disallow: /login/
+Disallow: /private/
+Disallow: /wp-admin/
+Disallow: /wp-login.php
+Disallow: /cgi-bin/
+Disallow: /tmp/
+Disallow: /cache/
+Disallow: /logs/
+Disallow: /user-profiles/
+Disallow: /private-data/
+Disallow: /paywall/
+Disallow: /checkout/
+Disallow: /cart/
+Disallow: /search/
+Disallow: /404/
+Disallow: /503/
+Disallow: /error-pages/
+Disallow: /old/
+Disallow: /draft/
+Disallow: /deprecated/
+Disallow: /backups/
+Disallow: /coming-soon/
+Disallow: /under-construction/
+Disallow: /dev/
+Disallow: /confidential/
+Disallow: /user-data/
+Disallow: /scraping/
+Disallow: /bot-data/
+Disallow: /api/
+Disallow: /unavailable/
+Disallow: /offline/
+Disallow: /*?utm_source=
+Disallow: /*?utm_medium=
+Disallow: /*?utm_campaign=
+Disallow: /*?ref=
+Disallow: /*?sessionid=
+Disallow: /*&*
+Disallow: /*?action=
+Disallow: /*?loggedin=
+Disallow: /*?tracking_code=
+Disallow: /*?referral_id=
+Disallow: /*?transaction_id=
+Disallow: /*?sort=
+Disallow: /*?filter=
+Disallow: /*?paged=
+Disallow: /wp-content/uploads/private/
+Disallow: /wp-content/themes/my-theme/private/
+Disallow: /wp-content/uploads/old/
+Disallow: /wp-content/uploads/temp/
+Disallow: /wp-includes/
+Disallow: /search/results/
+Disallow: /archives/
+Disallow: /backups/
+Disallow: /cgi-bin/
+Disallow: /static/
+Disallow: /comments/
+Disallow: /posts/old-comments/
+Disallow: /comments/old/
+Disallow: /posts/
+Disallow: /tmp/
+Disallow: /files/
+Disallow: /data/
+Disallow: /user-registration/
+Disallow: /contact-form/
+Disallow: /error-logs/
+Disallow: /user-profiles/
+Disallow: /user-content/
+Disallow: /*?utm_source=
+Disallow: /*?utm_medium=
+Disallow: /*?utm_campaign=
+Disallow: /*?debug=
+Disallow: /*?phpinfo=
+Disallow: /*?action=
+Disallow: /*?tracking_code=
+Disallow: /draft/
+Disallow: /error-logs/
+Disallow: /api/
+Disallow: /media/
+Disallow: /tmp/
+Disallow: /private/
+Disallow: /admin/
+Disallow: /login/
+Disallow: /cgi-bin/
+Disallow: /dev/
+Disallow: /old/
+Disallow: /backups/
+Disallow: /confidential/
+Disallow: /old-pages/
+Disallow: /deprecated-pages/
+Disallow: /archive/
+Disallow: /under-construction/
+Disallow: /coming-soon/
+Disallow: /user-data/
+Disallow: /confidential/
+Disallow: /private-data/
+Disallow: /scraping/
+Disallow: /api/
+Disallow: /bot-data/
+Disallow: /pages/temporary/
+Disallow: /temporary/
+Disallow: /cgi-bin/
+Disallow: /tmp/
+Disallow: /private/
+Disallow: /uploads/
+Disallow: /backups/
+Disallow: /error-pages/
+Disallow: /404/
+Disallow: /503/
+Disallow: /offline/
+Crawl-Delay: 10
+
+User-agent: Googlebot
+Disallow: /
+
+User-agent: Bingbot
+Disallow: /
+
+User-agent: Slurp
+Disallow: /
+
+User-agent: Baiduspider
+Disallow: /
+
+User-agent: Twitterbot
+Disallow: /
+
+User-agent: DuckDuckBot
+Disallow: /
+
+User-agent: FacebookExternalHit
+Disallow: /
+
+User-agent: Pinterestbot
+Disallow: /
+
+User-agent: Googlebot-Image
+Disallow: /
+
+User-agent: Googlebot-Video
+Disallow: /
