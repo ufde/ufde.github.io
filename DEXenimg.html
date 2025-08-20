@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Cifrado/Descifrado de Imágenes</title>
+<style>
+/* Fondo completo con imagen y overlay */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background: url('https://images7.alphacoders.com/135/thumb-1920-1356749.jpeg') no-repeat center center fixed;
+    background-size: cover;
+    color: #fff;
+}
+
+/* Overlay oscuro */
+body::before {
+    content: '';
+    position: fixed;
+    top:0; left:0;
+    width:100%; height:100%;
+    background: rgba(0,0,0,0.6);
+    z-index: -1;
+}
+
+/* Contenedores con estilo vidrio */
+section {
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(12px);
+    border-radius: 20px;
+    padding: 30px;
+    margin-bottom: 30px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    transition: transform 0.3s ease;
+}
+
+section:hover {
+    transform: translateY(-5px);
+}
+
+/* Títulos */
+h2 {
+    color: #fff;
+    text-shadow: 2px 2px 10px rgba(0,0,0,0.8);
+    margin-bottom: 25px;
+    font-size: 30px;
+}
+
+/* Inputs y textareas */
+input[type="file"], input[type="password"], textarea {
+    width: 100%;
+    padding: 14px 18px;
+    margin: 15px 0;
+    border-radius: 15px;
+    border: none;
+    font-size: 16px;
+    box-sizing: border-box;
+    background: rgba(255,255,255,0.2);
+    color: #fff;
+    backdrop-filter: blur(6px);
+}
+
+input::placeholder, textarea::placeholder {
+    color: #eee;
+}
+
+/* Botones estilo moderno */
+button {
+    background: linear-gradient(45deg,#ff6b6b,#f06595);
+    color: #fff;
+    border: none;
+    padding: 16px 28px;
+    margin: 10px 0;
+    border-radius: 15px;
+    font-size: 17px;
+    cursor: pointer;
+    transition: all 0.4s ease;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+}
+
+button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.7);
+}
+
+/* Botón de descarga */
+a.download-btn {
+    display: inline-block;
+    margin-top: 12px;
+    background: linear-gradient(45deg,#1e90ff,#00bfff);
+    color: #fff;
+    padding: 14px 24px;
+    border-radius: 15px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+}
+
+a.download-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.7);
+}
+
+/* Barra de progreso */
+.progress-container {
+    width: 100%;
+    background: rgba(255,255,255,0.25);
+    border-radius: 15px;
+    margin: 15px 0;
+    overflow: hidden;
+    height: 28px;
+}
+
+.progress-bar {
+    height: 100%;
+    width: 0;
+    background: linear-gradient(90deg,#ff6b6b,#f06595);
+    border-radius: 15px;
+    transition: width 0.4s ease;
+}
+
+/* Textarea cifrado */
+textarea {
+    resize: none;
+    font-family: monospace;
+}
+
+/* Imagen vista previa */
+img {
+    max-width: 100%;
+    margin-top: 20px;
+    border-radius: 20px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.5);
+}
+</style>
+</head>
+<body>
+
+<section>
+<h2>Cifrar Imagen</h2>
+<input type="file" id="imageInput" accept="image/*">
+<input type="password" id="encryptPassword" placeholder="Contraseña">
+<button onclick="encryptImage()">Cifrar</button>
+<div class="progress-container"><div class="progress-bar" id="encryptProgress"></div></div>
+<textarea id="encryptedText" readonly placeholder="Aquí aparecerá el texto cifrado"></textarea>
+<a id="downloadEncrypted" class="download-btn" download="imagen_cifrada.txt">Descargar TXT cifrado</a>
+</section>
+
+<section>
+<h2>Descifrar Imagen</h2>
+<textarea id="encryptedInput" placeholder="Pega aquí el texto cifrado"></textarea>
+<input type="password" id="decryptPassword" placeholder="Contraseña">
+<button onclick="decryptImage()">Descifrar</button>
+<div class="progress-container"><div class="progress-bar" id="decryptProgress"></div></div>
+<img id="previewImage" alt="Vista previa de la imagen descifrada">
+<a id="downloadImage" class="download-btn">Descargar Imagen Descifrada</a>
+</section>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+<script>
+function shiftString(str, shift){
+    return Array.from(str).map(c => String.fromCharCode((c.charCodeAt(0)+shift)%256)).join('');
+}
+
+function updateProgress(bar, percent){
+    document.getElementById(bar).style.width = percent + '%';
+}
+
+function encryptImage(){
+    const file = document.getElementById('imageInput').files[0];
+    const password = document.getElementById('encryptPassword').value;
+    if(!file || !password){ alert('Selecciona imagen y contraseña'); return; }
+    const reader = new FileReader();
+    reader.onload = function(e){
+        let bytes = new Uint8Array(e.target.result);
+        let hex = Array.from(bytes).map(b => b.toString(16).padStart(2,'0')).join('');
+        let transformed = shiftString(hex,1).split('').reverse().join('');
+        let metadata = btoa('0|'+hex[0]+'|'+hex[hex.length-1]);
+        const finalText = transformed + '|' + metadata;
+        document.getElementById('encryptedText').value = finalText;
+        const blob = new Blob([finalText], {type:'text/plain'});
+        document.getElementById('downloadEncrypted').href = URL.createObjectURL(blob);
+        updateProgress('encryptProgress',100);
+    }
+    reader.readAsArrayBuffer(file);
+    updateProgress('encryptProgress',50);
+}
+
+function decryptImage(){
+    const text = document.getElementById('encryptedInput').value;
+    const password = document.getElementById('decryptPassword').value;
+    if(!text || !password){ alert('Introduce texto y contraseña'); return; }
+    const parts = text.split('|');
+    if(parts.length < 2){ alert('Texto incorrecto'); return; }
+    let encrypted = parts[0].split('').reverse().join('');
+    encrypted = shiftString(encrypted,-1);
+    const bytes = new Uint8Array(encrypted.match(/.{1,2}/g).map(h => parseInt(h,16)));
+    const blob = new Blob([bytes], {type:'image/png'});
+    const url = URL.createObjectURL(blob);
+    const preview = document.getElementById('previewImage');
+    preview.src = url;
+    const downloadLink = document.getElementById('downloadImage');
+    downloadLink.href = url;
+    downloadLink.download = 'imagen_descifrada.png';
+    updateProgress('decryptProgress',100);
+}
+</script>
+
+</body>
+</html>
