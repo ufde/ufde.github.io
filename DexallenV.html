@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/x-icon" href="https://ufde.github.io/resources/stolaspfpbyundefinedname.jpg" />
+<title>DEX archivos multimedia</title>
+<style>
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background: url('https://images7.alphacoders.com/135/thumb-1920-1356749.jpeg') no-repeat center center fixed;
+    background-size: cover;
+    color: #fff;
+}
+body::before {
+    content: '';
+    position: fixed;
+    top:0; left:0;
+    width:100%; height:100%;
+    background: rgba(0,0,0,0.6);
+    z-index: -1;
+}
+section {
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(12px);
+    border-radius: 20px;
+    padding: 30px;
+    margin-bottom: 30px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    transition: transform 0.3s ease;
+}
+section:hover { transform: translateY(-5px); }
+h2 {
+    color: #fff;
+    text-shadow: 2px 2px 10px rgba(0,0,0,0.8);
+    margin-bottom: 25px;
+    font-size: 30px;
+}
+input[type="file"], input[type="password"], textarea {
+    width: 100%; padding: 14px 18px; margin: 15px 0;
+    border-radius: 15px; border: none; font-size: 16px;
+    box-sizing: border-box; background: rgba(255,255,255,0.2);
+    color: #fff; backdrop-filter: blur(6px);
+}
+input::placeholder, textarea::placeholder { color: #eee; }
+button {
+    background: linear-gradient(45deg,#ff6b6b,#f06595);
+    color: #fff; border: none; padding: 16px 28px;
+    margin: 10px 0; border-radius: 15px; font-size: 17px;
+    cursor: pointer; transition: all 0.4s ease;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+}
+button:hover { transform: translateY(-3px); box-shadow: 0 10px 25px rgba(0,0,0,0.7); }
+a.download-btn {
+    display: inline-block; margin-top: 12px;
+    background: linear-gradient(45deg,#1e90ff,#00bfff);
+    color: #fff; padding: 14px 24px; border-radius: 15px;
+    text-decoration: none; font-weight: bold;
+    transition: all 0.3s ease; box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+}
+a.download-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0,0,0,0.7); }
+.progress-container {
+    width: 100%; background: rgba(255,255,255,0.25);
+    border-radius: 15px; margin: 15px 0; overflow: hidden; height: 28px;
+}
+.progress-bar {
+    height: 100%; width: 0;
+    background: linear-gradient(90deg,#ff6b6b,#f06595);
+    border-radius: 15px; transition: width 0.4s ease;
+}
+textarea { resize: none; font-family: monospace; }
+img, video {
+    max-width: 100%; margin-top: 20px; border-radius: 20px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.5);
+}
+video { max-height: 400px; }
+</style>
+</head>
+<body>
+
+<section>
+<h2>Cifrar Archivo Dex (Imagen/Video)</h2>
+<input type="file" id="fileInput" accept="image/*,video/*">
+<input type="password" id="encryptPassword" placeholder="Contraseña">
+<button onclick="encryptFile()">Cifrar</button>
+<div class="progress-container"><div class="progress-bar" id="encryptProgress"></div></div>
+<textarea id="encryptedText" readonly placeholder="Aquí aparecerá el texto cifrado"></textarea>
+<a id="downloadEncrypted" class="download-btn" download="archivo_cifrado.txt">Descargar TXT cifrado</a>
+</section>
+
+<section>
+<h2>Descifrar Archivo</h2>
+<textarea id="encryptedInput" placeholder="Pega aquí el texto cifrado"></textarea>
+<input type="file" id="encryptedFile" accept=".txt">
+<input type="password" id="decryptPassword" placeholder="Contraseña">
+<button onclick="decryptFile()">Descifrar</button>
+<div class="progress-container"><div class="progress-bar" id="decryptProgress"></div></div>
+
+<div id="previewContainer"></div>
+<a id="downloadFile" class="download-btn">Descargar Archivo Descifrado</a>
+</section>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+<script>
+function deriveKey(password){ return CryptoJS.SHA256(password); }
+function updateProgress(bar, percent){ document.getElementById(bar).style.width = percent + '%'; }
+
+function scrambleBlocks(str, size=32, password=""){
+    const key = deriveKey(password).toString();
+    return str.match(new RegExp('.{1,'+size+'}', 'g')).map((s,i) => {
+        const offset = key.charCodeAt(i % key.length) % s.length;
+        return s.slice(-offset) + s.slice(0, -offset);
+    }).join('');
+}
+function descrambleBlocks(str, size=32, password=""){
+    const key = deriveKey(password).toString();
+    return str.match(new RegExp('.{1,'+size+'}', 'g')).map((s,i) => {
+        const offset = key.charCodeAt(i % key.length) % s.length;
+        return s.slice(offset) + s.slice(0, offset);
+    }).join('');
+}
+function insertMarkers(str){
+    let result = '';
+    for(let i=0, j=0; i<str.length; i++, j++){
+        result += str[i];
+        if(j===12){ result += "["; j++; }
+        if(j===26){ result += "]"; j++; }
+        if(j===40){ result += "%"; j=0; }
+    }
+    return result;
+}
+function removeMarkers(str){ return str.replace(/\[|\]|%/g, ''); }
+
+function encryptFile(){
+    const file = document.getElementById('fileInput').files[0];
+    const password = document.getElementById('encryptPassword').value;
+    if(!file || !password){ alert('Selecciona archivo y contraseña'); return; }
+    const reader = new FileReader();
+    reader.onload = function(e){
+        const bytes = new Uint8Array(e.target.result);
+        const wordArray = CryptoJS.lib.WordArray.create(bytes);
+        const key = deriveKey(password);
+        const iv = CryptoJS.lib.WordArray.random(16);
+        const encrypted = CryptoJS.AES.encrypt(wordArray, key, { iv: iv });
+        let finalText = iv.toString() + ":" + encrypted.toString() + ":" + file.type;
+        const hmac = CryptoJS.HmacSHA256(finalText, key).toString();
+        finalText = finalText + ":" + hmac;
+        finalText = scrambleBlocks(finalText, 32, password);
+        finalText = insertMarkers(finalText);
+        const blob = new Blob([finalText], {type:'text/plain'});
+        document.getElementById('encryptedText').value = finalText;
+        document.getElementById('downloadEncrypted').href = URL.createObjectURL(blob);
+        updateProgress('encryptProgress',100);
+    }
+    reader.readAsArrayBuffer(file);
+    updateProgress('encryptProgress',50);
+}
+
+function decryptFile(){
+    let text = document.getElementById('encryptedInput').value;
+    const password = document.getElementById('decryptPassword').value;
+    if(!text || !password){ alert('Introduce texto y contraseña'); return; }
+    try {
+        text = removeMarkers(text);
+        text = descrambleBlocks(text, 32, password);
+        const parts = text.split(":");
+        if(parts.length < 4) throw new Error("Texto incorrecto");
+        const iv = CryptoJS.enc.Hex.parse(parts[0]);
+        const encryptedData = parts[1];
+        const mimeType = parts[2];
+        const receivedHmac = parts[3];
+        const key = deriveKey(password);
+        const checkHmac = CryptoJS.HmacSHA256(parts[0]+":"+parts[1]+":"+parts[2], key).toString();
+        if(checkHmac !== receivedHmac) throw new Error("HMAC no coincide");
+        const decrypted = CryptoJS.AES.decrypt(encryptedData, key, { iv: iv });
+        const bytes = new Uint8Array(decrypted.sigBytes);
+        for (let i = 0; i < decrypted.sigBytes; i++) {
+            bytes[i] = (decrypted.words[i >>> 2] >>> (24 - (i % 4) * 8)) & 0xff;
+        }
+        const blob = new Blob([bytes], {type: mimeType});
+        const url = URL.createObjectURL(blob);
+
+        const preview = document.getElementById('previewContainer');
+        preview.innerHTML = "";
+        if(mimeType.startsWith("image")){
+            const img = document.createElement("img");
+            img.src = url;
+            preview.appendChild(img);
+        } else if(mimeType.startsWith("video")){
+            const vid = document.createElement("video");
+            vid.src = url;
+            vid.controls = true;
+            preview.appendChild(vid);
+        }
+        const downloadLink = document.getElementById('downloadFile');
+        downloadLink.href = url;
+        downloadLink.download = "archivo_descifrado" + (mimeType.startsWith("image")?".png":".mp4");
+        updateProgress('decryptProgress',100);
+    } catch(e){
+        alert("Error al descifrar: contraseña incorrecta, HMAC incorrecto o datos corruptos.");
+    }
+}
+
+document.getElementById("encryptedFile").addEventListener("change", function(){
+    const file = this.files[0];
+    if(file){
+        const reader = new FileReader();
+        reader.onload = function(e){
+            document.getElementById("encryptedInput").value = e.target.result.trim();
+        }
+        reader.readAsText(file);
+    }
+});
+</script>
+</body>
+</html>
