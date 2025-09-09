@@ -1,0 +1,71 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background: radial-gradient(circle at top, #1f1f1f, #121212);
+  font-family: 'Days One', sans-serif;
+  color: #f0f0f0;
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 20px;
+  gap: 20px;
+}
+
+h1 {
+  margin: 0;
+  font-size: 2.5rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+input[type="file"], button, label, select, input[type="range"] {
+  font-size: 1rem;
+  font-family: 'Days One', sans-serif;
+}
+
+button {
+  background-color: #333;
+  color: #fff;
+  border: 1px solid #444;
+  border-radius: 10px;
+  padding: 10px 20px;
+  transition: background 0.3s, transform 0.2s;
+}
+
+button:hover {
+  background-color: #555;
+  transform: translateY(-2px);
+}
+
+label, select, input[type="range"], input[type="checkbox"], span {
+  margin-left: 8px;
+  vertical-align: middle;
+}
+
+select, input[type="range"] {
+  background-color: #2a2a2a;
+  color: #fff;
+  border: 1px solid #555;
+  border-radius: 6px;
+  padding: 4px 8px;
+}
+
+input[type="checkbox"] {
+  transform: scale(1.2);
+}
+
+canvas#canvas {
+  border: 2px solid #444;
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.6);
+}
+
